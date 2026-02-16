@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,6 @@
     <%= if assigns[:post] do %>
       <meta property="og:title" content={@post.title} />
       <meta property="og:description" content={@post.description} />
-
       <meta property="twitter:title" content={@post.title} />
       <meta property="twitter:description" content={@post.description} />
     <% end %>
@@ -17,83 +16,20 @@
     </.live_title>
     <link rel="preconnect" href="https://fabridamazio.com" />
     <style>
-      body { background-color: #111827; } /* bg-gray-900 */
+      body { background-color: #0a0f1a; }
     </style>
-    <link
-      rel="preload"
-      href={~p"/assets/css/app.css"}
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-      phx-track-static
-    />
+    <link rel="stylesheet" href={~p"/assets/css/app.css"} phx-track-static />
     <link rel="preload" href="/images/br_flag.svg" as="image" type="image/svg+xml" />
     <link rel="preload" href="/images/us_flag.svg" as="image" type="image/svg+xml" />
     <link rel="preload" href="/images/cn_flag.svg" as="image" type="image/svg+xml" />
-    <header class="bg-gray-800 shadow">
-      <div class="container mx-auto max-w-5xl px-4 py-6 flex flex-col sm:flex-row sm:justify-between sm:items-center">
-        <div>
-          <a href={~p"/"}>
-            <h1 class="text-2xl font-bold text-gray-200 hover:text-gray-400">Fabricio Damazio</h1>
-            <p class="text-gray-400 text-sm">{gettext("motto")}</p>
-          </a>
-        </div>
-        <nav class="space-x-4 mt-4 sm:mt-0 mr-2 flex items-center">
-          <a
-            href={generate_locale_url(@conn, "pt")}
-            class="text-xl opacity-90 hover:opacity-60 hover:scale-110 transition-transform duration-200"
-            title="Português"
-          >
-            <img
-              src="/images/br_flag.svg"
-              alt="Brasil"
-              width="24"
-              height="24"
-              class="inline-block"
-            />
-          </a>
-          <a
-            href={generate_locale_url(@conn, "en")}
-            class="text-xl opacity-90 hover:opacity-60 hover:scale-110 transition-transform duration-200"
-            title="English"
-          >
-            <img
-              src="/images/us_flag.svg"
-              alt="United States"
-              width="24"
-              height="24"
-              class="inline-block"
-            />
-          </a>
-          <a
-            href={generate_locale_url(@conn, "zh")}
-            class="text-xl opacity-90 hover:opacity-60 hover:scale-110 transition-transform duration-200"
-            title="中文"
-          >
-            <img
-              src="/images/cn_flag.svg"
-              alt="United States"
-              width="24"
-              height="24"
-              class="inline-block"
-            />
-          </a>
-          <a
-            href="/about"
-            class="ml-4 text-gray-200 font-bold hover:text-gray-400 hover:font-bold transition"
-          >
-            {gettext("About me")}
-          </a>
-        </nav>
-      </div>
-    </header>
     <script>
       (function () {
         const hasLocaleQuery = window.location.search.includes("locale=");
         const hasLocaleCookie = document.cookie.split('; ').some(cookie => cookie.startsWith("locale="));
-        
+
         if (!hasLocaleQuery && !hasLocaleCookie) {
-          const lang = navigator.language || navigator.userLanguage; //ex: pt-BR
-          const locale = lang.split("-")[0]; //ex: pt, en, etc
+          const lang = navigator.language || navigator.userLanguage;
+          const locale = lang.split("-")[0];
 
           const url = new URL(window.location.href);
           url.searchParams.set("locale", locale);
@@ -103,8 +39,124 @@
       })();
     </script>
   </head>
-  <body>
-    <.flash flash={@flash} />
-    {@inner_content}
+  <body class="min-h-screen flex flex-col bg-[#0a0f1a] text-gray-200 antialiased">
+    <!-- Sticky glassmorphism navbar -->
+    <header class="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0a0f1a]/80 backdrop-blur-xl">
+      <div class="mx-auto max-w-5xl px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <!-- Brand -->
+        <a href={~p"/"} class="group flex flex-col gap-0.5">
+          <span class="text-xl font-bold tracking-tight text-gray-100 transition-colors group-hover:text-indigo-400">
+            Fabricio Damazio
+          </span>
+          <span class="text-xs font-medium tracking-wide text-gray-500 transition-colors group-hover:text-gray-400">
+            {gettext("motto")}
+          </span>
+        </a>
+
+<!-- Navigation -->
+        <nav class="flex items-center gap-3">
+          <!-- Language switcher -->
+          <div class="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5">
+            <a
+              href={generate_locale_url(@conn, "pt")}
+              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              title="Português"
+            >
+              <img
+                src="/images/br_flag.svg"
+                alt="Brasil"
+                width="24"
+                height="24"
+                class="block sm:w-5 sm:h-5"
+              />
+            </a>
+            <a
+              href={generate_locale_url(@conn, "en")}
+              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              title="English"
+            >
+              <img
+                src="/images/us_flag.svg"
+                alt="United States"
+                width="24"
+                height="24"
+                class="block sm:w-5 sm:h-5"
+              />
+            </a>
+            <a
+              href={generate_locale_url(@conn, "zh")}
+              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              title="中文"
+            >
+              <img
+                src="/images/cn_flag.svg"
+                alt="中文"
+                width="24"
+                height="24"
+                class="block sm:w-5 sm:h-5"
+              />
+            </a>
+          </div>
+
+<!-- About link -->
+          <a
+            href="/about"
+            class="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 text-sm font-semibold text-gray-300 transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300"
+          >
+            {gettext("About me")}
+          </a>
+        </nav>
+      </div>
+    </header>
+
+<!-- Main content -->
+    <main class="flex-1">
+      <.flash flash={@flash} />
+      {@inner_content}
+    </main>
+
+<!-- Footer -->
+    <footer class="border-t border-white/[0.06] bg-[#0a0f1a]/60">
+      <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+        <p class="text-xs text-gray-600">
+          © {Date.utc_today().year} Fabricio Damazio
+        </p>
+        <div class="flex items-center gap-5">
+          <a
+            href="https://github.com/FabriDamazio"
+            target="_blank"
+            rel="noopener"
+            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-gray-300"
+            aria-label="GitHub"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.21 11.44c.6.11.82-.26.82-.58v-2.16c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.32-1.75-1.32-1.75-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.45.99.11-.77.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.76.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.47 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.83.58A12.01 12.01 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+          <a
+            href="https://youtube.com/@FabriDamazio"
+            target="_blank"
+            rel="noopener"
+            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-red-500"
+            aria-label="YouTube"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a2.994 2.994 0 00-2.108-2.12C19.686 3.5 12 3.5 12 3.5s-7.686 0-9.39.566a2.994 2.994 0 00-2.108 2.12A31.5 31.5 0 000 12a31.5 31.5 0 00.502 5.814 2.994 2.994 0 002.108 2.12C4.314 20.5 12 20.5 12 20.5s7.686 0 9.39-.566a2.994 2.994 0 002.108-2.12A31.5 31.5 0 0024 12a31.5 31.5 0 00-.502-5.814zM9.75 15.02v-6.04l6 3.02-6 3.02z" />
+            </svg>
+          </a>
+          <a
+            href="https://bsky.app/profile/fabridamazio.com"
+            target="_blank"
+            rel="noopener"
+            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-blue-400"
+            aria-label="Bluesky"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 600 512" fill="currentColor">
+              <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

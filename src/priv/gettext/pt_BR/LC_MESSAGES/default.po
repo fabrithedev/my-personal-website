@@ -62,3 +62,6 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "post-not-found-locale"
 msgstr ""
+
+msgid "Back to posts"
+msgstr "Voltar aos posts"

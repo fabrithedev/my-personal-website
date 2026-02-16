@@ -76,3 +76,6 @@ msgstr "Be a programmer or die trying"
 #, elixir-autogen, elixir-format
 msgid "post-not-found-locale"
 msgstr "This post is not available in this language or does not exist."
+
+msgid "Back to posts"
+msgstr "Back to posts"

@@ -3,149 +3,256 @@
 @source "../js";
 @source "../../lib/site_web";
 
+/* ─── Base ─── */
+
 body {
-  background-color: #111827; 
+    background-color: #0a0f1a;
 }
 
+::selection {
+    background-color: rgba(99, 102, 241, 0.3);
+    color: #e0e7ff;
+}
+
+/* ─── Flash messages ─── */
+
 .flash-messages {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-  max-width: 300px;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    max-width: 300px;
 }
 
 .flash {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  animation: fadeIn 0.3s ease-in-out;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
 }
 
 .flash-info {
-  background-color: #d1fae5;
-  color: #065f46;
-  border-left: 4px solid #10b981;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border-left: 3px solid #10b981;
 }
 
 .flash-error {
-  background-color: #fee2e2;
-  color: #b91c1c;
-  border-left: 4px solid #ef4444;
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    border-left: 3px solid #ef4444;
 }
 
 @keyframes fadeIn {
-  from { 
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 }
 
 @keyframes fadeOut {
-  to { 
-    opacity: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
+    to {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
 }
 
 .flash {
-  animation: 
-    fadeIn 0.3s ease-in-out,
-    fadeOut 0.3s ease-in-out 5s forwards;
+    animation:
+        fadeIn 0.3s ease-out,
+        fadeOut 0.3s ease-in-out 5s forwards;
 }
 
+/* ─── Markdown / Article ─── */
+
 .markdown-raw {
-  color: #e5e7eb; 
+    color: #c9d1d9;
+    line-height: 1.8;
 }
 
 .markdown-raw h1 {
-  @apply text-2xl font-bold mt-12 mb-6 text-gray-100;
+    @apply text-2xl font-bold mt-14 mb-6 text-gray-100 tracking-tight;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.5rem;
 }
 
 .markdown-raw h2 {
-  @apply text-xl font-semibold mt-10 mb-4 text-gray-100;
+    @apply text-xl font-semibold mt-12 mb-4 text-gray-100 tracking-tight;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 0.4rem;
 }
 
 .markdown-raw h3 {
-  @apply text-lg font-medium mt-8 mb-3 text-gray-100;
+    @apply text-lg font-medium mt-10 mb-3 text-gray-200;
+}
+
+.markdown-raw h4 {
+    @apply text-base font-medium mt-8 mb-2 text-gray-200;
 }
 
 .markdown-raw p {
-  @apply my-4 leading-relaxed;
+    @apply my-4 leading-relaxed;
 }
 
 .markdown-raw a {
-  @apply text-pink-400 hover:text-pink-300 underline transition-colors;
+    @apply text-indigo-400 hover:text-indigo-300 underline decoration-indigo-500/30 underline-offset-2 transition-colors;
+}
+
+.markdown-raw a:hover {
+    @apply decoration-indigo-400/60;
+}
+
+.markdown-raw strong {
+    @apply font-semibold text-gray-100;
+}
+
+.markdown-raw em {
+    @apply text-gray-300;
 }
 
 .markdown-raw ul,
 .markdown-raw ol {
-  @apply my-4 pl-6;
+    @apply my-4 pl-6;
 }
 
 .markdown-raw li {
-  @apply my-2;
+    @apply my-2;
 }
 
 .markdown-raw ul {
-  list-style-type: disc;
+    list-style-type: disc;
+}
+
+.markdown-raw ul li::marker {
+    color: #6366f1;
 }
 
 .markdown-raw ol {
-  list-style-type: decimal;
+    list-style-type: decimal;
+}
+
+.markdown-raw ol li::marker {
+    color: #818cf8;
 }
 
 .markdown-raw pre {
-  @apply bg-gray-800 rounded p-4 my-6 overflow-x-auto text-sm;
+    @apply rounded-xl my-6 overflow-x-auto text-sm;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1.25rem;
+}
+
+.markdown-raw pre code {
+    @apply bg-transparent p-0 rounded-none text-sm;
 }
 
 .markdown-raw code {
-  @apply bg-gray-800 px-2 py-1 rounded text-sm font-mono;
+    @apply text-sm font-mono rounded-md;
+    background-color: rgba(255, 255, 255, 0.06);
+    padding: 0.15rem 0.4rem;
+    color: #c4b5fd;
 }
 
 .markdown-raw hr {
-  @apply my-8 border-gray-700;
+    @apply my-10;
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
 }
 
 .markdown-raw blockquote {
-  @apply border-l-4 border-gray-600 pl-4 italic text-gray-400 my-6;
+    @apply my-6 text-gray-400 italic;
+    border-left: 3px solid rgba(99, 102, 241, 0.4);
+    padding-left: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 0 8px 8px 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.markdown-raw blockquote p {
+    @apply my-0;
+}
+
+.markdown-raw img {
+    @apply rounded-xl my-6;
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .markdown-raw table {
-  @apply w-full my-6 border-collapse;
+    @apply w-full my-6;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .markdown-raw th {
-  @apply bg-gray-800 text-left p-3 border-b border-gray-700;
+    @apply text-left text-xs font-semibold uppercase tracking-wider text-gray-300;
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .markdown-raw td {
-  @apply p-3 border-b border-gray-800;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.markdown-raw tr:last-child td {
+    border-bottom: none;
 }
 
 .markdown-raw .data-list {
-  @apply my-4 pl-0 list-none;
+    @apply my-4 pl-0 list-none;
 }
 
 .markdown-raw .data-list li {
-  @apply flex items-baseline;
+    @apply flex items-baseline;
 }
 
 .markdown-raw .data-list li::before {
-  content: "-";
-  @apply mr-2 text-gray-500;
+    content: "–";
+    @apply mr-2 text-indigo-500;
+}
+
+/* ─── Scrollbar (Webkit) ─── */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }

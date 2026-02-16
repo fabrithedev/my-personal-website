@@ -1,44 +1,59 @@
-<div class="min-h-screen flex flex-col bg-gray-900">
-  <main class="flex-grow container mx-auto max-w-5xl px-4 pb-6">
-    <div class="my-4">
-      <%= for tag <- @tags do %>
-        <a
-          href={"/posts?tag=#{tag}"}
-          class={"inline-block text-xs font-medium px-2 py-1 rounded-full mx-2 hover:opacity-80 transition " <> tag_classes(tag)}
-        >
-          {tag}
-        </a>
-      <% end %>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <%= for post <- @posts do %>
-        <a
-          href={"/posts/#{post.date.year}/#{post.date.month}/#{post.id}"}
-          class="group block transform transition duration-300 ease-in-out hover:scale-[1.02] bg-gray-800 rounded-2xl shadow hover:shadow-md overflow-hidden cursor-pointer"
-        >
-          <div class="p-4 flex flex-col gap-2">
-            <div class="text-xl font-semibold text-gray-100 group-hover:underline">
-              {post.title}
-            </div>
+<div class="mx-auto max-w-5xl px-6 py-10">
+  <!-- Tag filter bar -->
+  <div class="mb-8 flex flex-wrap items-center gap-2">
+    <span class="mr-1 text-xs font-medium uppercase tracking-widest text-gray-500">Tags</span>
+    <%= for tag <- @tags do %>
+      <a
+        href={"/posts?tag=#{tag}"}
+        class={"inline-flex items-center rounded-full border border-white/[0.08] px-3 py-1 text-xs font-medium transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300 " <> tag_classes(tag)}
+      >
+        {tag}
+      </a>
+    <% end %>
+  </div>
+  
+<!-- Post grid -->
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <%= for post <- @posts do %>
+      <a
+        href={"/posts/#{post.date.year}/#{post.date.month}/#{post.id}"}
+        class="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
+      >
+        <!-- Accent gradient bar -->
+        <div class="h-[2px] w-full bg-gradient-to-r from-indigo-500/60 via-purple-500/60 to-pink-500/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        </div>
 
-            <p class="text-gray-200 text-sm">
-              {post.description}
-            </p>
-
-            <div class="flex flex-wrap gap-2 mt-2">
-              <%= for tag <- post.tags do %>
-                <span class={"text-xs font-medium px-2 py-1 rounded-full " <> tag_classes(tag)}>
-                  {tag}
-                </span>
-              <% end %>
-            </div>
-
-            <div class="mt-auto text-gray-200 text-xs">
-              {Calendar.strftime(post.date, "%B %-d, %Y")}
-            </div>
+        <div class="flex flex-1 flex-col gap-3 p-5">
+          <!-- Title -->
+          <h2 class="text-lg font-semibold leading-snug text-gray-100 transition-colors group-hover:text-indigo-300">
+            {post.title}
+          </h2>
+          
+<!-- Description -->
+          <p class="line-clamp-3 text-sm leading-relaxed text-gray-400">
+            {post.description}
+          </p>
+          
+<!-- Tags -->
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <%= for tag <- post.tags do %>
+              <span class={"inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide " <> tag_classes(tag)}>
+                {tag}
+              </span>
+            <% end %>
           </div>
-        </a>
-      <% end %>
-    </div>
-  </main>
+          
+<!-- Date -->
+          <div class="mt-auto pt-3">
+            <time
+              datetime={Date.to_iso8601(post.date)}
+              class="text-[11px] font-medium tracking-wide text-gray-600"
+            >
+              {Calendar.strftime(post.date, "%B %-d, %Y")}
+            </time>
+          </div>
+        </div>
+      </a>
+    <% end %>
+  </div>
 </div>

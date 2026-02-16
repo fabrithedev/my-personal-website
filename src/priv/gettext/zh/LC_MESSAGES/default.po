@@ -77,3 +77,5 @@ msgstr "不当程序员，便永不放弃 "
 msgid "post-not-found-locale"
 msgstr "此帖子不提供此语言版本或不存在。"
 
+msgid "Back to posts"
+msgstr "返回文章列表"

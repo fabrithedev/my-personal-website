@@ -1,7 +1,7 @@
 %{
     title: "Neovim e LLMs locais",
     author: "Fabricio Damazio",
-    tags: ~w(programming),
+    tags: ~w(rust),
     description: "Minha experiência com o Ollama e o plugin CodeCompanion no Neovim."
 }
 ---
@@ -76,4 +76,3 @@ Todo meu código
 de configuração do Neovim esta disponível [neste repositório](https://github.com/FabriDamazio/nvim){: target="_blank" .font-medium .text-pink-800 }.
 
 ---
-

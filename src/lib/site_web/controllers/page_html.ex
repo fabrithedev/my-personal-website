@@ -6,17 +6,17 @@ defmodule SiteWeb.PageHTML do
   """
   use SiteWeb, :html
 
-  embed_templates "page_html/*"
+  embed_templates("page_html/*")
 
   def tag_classes(tag) do
     case String.downcase(tag) do
-      "elixir" -> "bg-purple-100 text-purple-800"
-      "devlog" -> "bg-pink-100 text-pink-800"
-      "programming" -> "bg-cyan-100 text-cyan-800"
-      "rust" -> "bg-orange-100 text-orange-800"
-      "gamedev" -> "bg-green-100 text-green-800"
-      "offtopic" -> "bg-blue-100 text-blue-800"
-      _ -> "bg-gray-200 text-gray-800"
+      "elixir" -> "bg-purple-500/15 text-purple-300"
+      "devlog" -> "bg-pink-500/15 text-pink-300"
+      "programming" -> "bg-cyan-500/15 text-cyan-300"
+      "rust" -> "bg-orange-500/20 text-orange-400"
+      "gamedev" -> "bg-green-500/15 text-green-300"
+      "offtopic" -> "bg-blue-500/15 text-blue-300"
+      _ -> "bg-gray-500/15 text-gray-300"
     end
   end
 end
