@@ -16,7 +16,8 @@ defmodule Site.Blog do
     build: Post,
     from: posts_dir,
     as: :posts,
-    highlighters: [:makeup_elixir, :makeup_erlang]
+    highlighters: [:makeup_elixir, :makeup_erlang],
+    earmark_options: %Earmark.Options{smartypants: false}
 
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 

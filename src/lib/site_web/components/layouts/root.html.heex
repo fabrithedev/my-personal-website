@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <meta name="description" content="Fabri Damazio's blog." />
+    <meta name="description" content="fabrithedev - blog" />
     <%= if assigns[:post] do %>
       <meta property="og:title" content={@post.title} />
       <meta property="og:description" content={@post.description} />
@@ -46,13 +46,13 @@
         <!-- Brand -->
         <a href={~p"/"} class="group flex flex-col gap-0.5">
           <span class="text-xl font-bold tracking-tight text-gray-100 transition-colors group-hover:text-indigo-400">
-            Fabricio Damazio
+            fabri the dev
           </span>
           <span class="text-xs font-medium tracking-wide text-gray-500 transition-colors group-hover:text-gray-400">
             {gettext("motto")}
           </span>
         </a>
-
+        
 <!-- Navigation -->
         <nav class="flex items-center gap-3">
           <!-- Language switcher -->
@@ -97,7 +97,7 @@
               />
             </a>
           </div>
-
+          
 <!-- About link -->
           <a
             href="/about"
@@ -108,13 +108,13 @@
         </nav>
       </div>
     </header>
-
+    
 <!-- Main content -->
     <main class="flex-1">
       <.flash flash={@flash} />
       {@inner_content}
     </main>
-
+    
 <!-- Footer -->
     <footer class="border-t border-white/[0.06] bg-[#0a0f1a]/60">
       <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
@@ -123,7 +123,7 @@
         </p>
         <div class="flex items-center gap-5">
           <a
-            href="https://github.com/FabriDamazio"
+            href="https://github.com/fabrithedev"
             target="_blank"
             rel="noopener"
             class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-gray-300"
@@ -134,7 +134,7 @@
             </svg>
           </a>
           <a
-            href="https://youtube.com/@FabriDamazio"
+            href="https://youtube.com/@fabrithedev"
             target="_blank"
             rel="noopener"
             class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-red-500"
@@ -145,7 +145,7 @@
             </svg>
           </a>
           <a
-            href="https://bsky.app/profile/fabridamazio.com"
+            href="https://bsky.app/profile/fabrithedev.com"
             target="_blank"
             rel="noopener"
             class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-blue-400"
