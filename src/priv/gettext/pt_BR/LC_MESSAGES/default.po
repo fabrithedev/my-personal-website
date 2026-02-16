@@ -65,3 +65,6 @@ msgstr ""
 
 msgid "Back to posts"
 msgstr "Voltar aos posts"
+
+msgid "Recent on Bluesky"
+msgstr "Recentes no Bluesky"
