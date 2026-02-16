@@ -6,7 +6,8 @@ defmodule SiteWeb.PageController do
   def home(conn, _params) do
     posts = Blog.get_posts(8, SiteWeb.Gettext |> Gettext.get_locale())
     tags = Blog.get_tags()
-    render(conn, :home, posts: posts, tags: tags, layout: false)
+    skeets = Site.Bluesky.get_posts(10)
+    render(conn, :home, posts: posts, tags: tags, skeets: skeets, layout: false)
   end
 
   def show(conn, %{"year" => year, "month" => month, "id" => id}) do

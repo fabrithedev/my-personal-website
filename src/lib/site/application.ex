@@ -14,6 +14,7 @@ defmodule Site.Application do
       {Phoenix.PubSub, name: Site.PubSub},
       # Start a worker by calling: Site.Worker.start_link(arg)
       # {Site.Worker, arg},
+      Site.Bluesky,
       # Start to serve requests, typically the last entry
       SiteWeb.Endpoint
     ]

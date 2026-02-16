@@ -6,11 +6,14 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :site, SiteWeb.Endpoint,
-  url: [host: "fabridamazio.com"],
+  url: [host: "fabrithedev.com"],
   check_origin: [
     "https://fabridamazio.com",
     "//*.fabridamazio.com",
     "https://www.fabridamazio.com",
+    "https://fabrithedev.com",
+    "//*.fabrithedev.com",
+    "https://www.fabrithedev.com",
     "https://my-personal-website.fly.dev"
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"

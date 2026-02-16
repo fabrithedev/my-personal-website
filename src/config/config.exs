@@ -65,6 +65,9 @@ config :site, SiteWeb.Gettext,
   locales: ~w(pt en zh),
   default_locale: "en"
 
+# Bluesky handle for fetching posts
+config :site, bluesky_handle: "fabrithedev.com"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
