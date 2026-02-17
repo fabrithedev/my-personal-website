@@ -6,4 +6,4 @@
 }
 ---
 
-There's no better time to start over than now
+There's no better time to start over than now.
