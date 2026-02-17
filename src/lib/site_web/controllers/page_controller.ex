@@ -53,13 +53,15 @@ defmodule SiteWeb.PageController do
   def posts(conn, %{"tag" => tag}) do
     posts = Blog.get_posts_by_tag(tag)
     tags = Blog.get_tags()
-    render(conn, :home, posts: posts, tags: tags, layout: false)
+    skeets = Site.Bluesky.get_posts(10)
+    render(conn, :home, posts: posts, tags: tags, skeets: skeets, layout: false)
   end
 
   def posts(conn, _params) do
     posts = Blog.get_posts(8, Gettext |> Gettext.get_locale())
     tags = Blog.get_tags()
-    render(conn, :home, posts: posts, tags: tags, layout: false)
+    skeets = Site.Bluesky.get_posts(10)
+    render(conn, :home, posts: posts, tags: tags, skeets: skeets, layout: false)
   end
 
   defp get_post_by_id_and_locale(id, locale) do
