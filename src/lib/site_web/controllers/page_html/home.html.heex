@@ -72,7 +72,7 @@
         {gettext("Recent on Bluesky")}
       </h2>
       <div
-        class="scrollbar-persistent flex max-h-[17rem] flex-col gap-4 overflow-y-scroll pr-2"
+        class="scrollbar-persistent flex max-h-80 flex-col gap-4 overflow-y-scroll pr-2"
         style="-webkit-overflow-scrolling: touch; scroll-snap-type: y mandatory;"
       >
         <%= for skeet <- @skeets do %>
@@ -80,7 +80,7 @@
             href={skeet.url}
             target="_blank"
             rel="noopener"
-            class="group flex-shrink-0 snap-start rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
+            class="group cursor-pointer flex-shrink-0 snap-start rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
           >
             <%= if skeet.reposted_by do %>
               <div class="mb-2 flex items-center gap-1.5 text-[11px] text-gray-500">
