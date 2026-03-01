@@ -4,7 +4,7 @@
     <span class="mr-1 text-xs font-medium uppercase tracking-widest text-gray-500">Tags</span>
     <%= for tag <- @tags do %>
       <a
-        href={"/posts?tag=#{tag}"}
+        href={if tag == @current_tag, do: "/", else: "/posts?tag=#{tag}"}
         class={[
           "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300",
           if(@current_tag != nil and tag != @current_tag,
