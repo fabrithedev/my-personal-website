@@ -70,7 +70,6 @@ defmodule Site.MixProject do
       {:makeup_erlang, "~> 1.0"},
       {:makeup_html, "~> 0.2.0"},
       {:makeup_eex, "~> 2.0"},
-      {:makeup_syntect, "~> 0.1"},
       {:earmark, "1.5.0-pre1", override: true}
     ]
   end
