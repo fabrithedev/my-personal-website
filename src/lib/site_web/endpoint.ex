@@ -27,13 +27,16 @@ defmodule SiteWeb.Endpoint do
     cache_control_for_etags: "public, max-age=31536000, immutable",
     only: SiteWeb.static_paths()
 
+  if Code.ensure_loaded?(Tidewave) do
+    plug Tidewave
+  end
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    # plug Phoenix.Ecto.CheckRepoStatus, otp_app: :site
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
