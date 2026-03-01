@@ -151,4 +151,72 @@ defmodule SiteWeb.CoreComponents do
     </a>
     """
   end
+
+  @doc """
+  Renders a blog post card.
+
+  ## Examples
+
+      <.post post={@post} />
+  """
+  attr(:post, :map, required: true)
+
+  def post(assigns) do
+    ~H"""
+    <a
+      href={"/posts/#{@post.date.year}/#{@post.date.month}/#{@post.id}"}
+      class="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
+    >
+      <!-- Accent gradient bar -->
+      <div class="h-[2px] w-full bg-gradient-to-r from-indigo-500/60 via-purple-500/60 to-pink-500/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      </div>
+
+      <div class="flex flex-1 flex-col gap-3 p-5">
+        <!-- Title -->
+        <h2 class="text-lg font-semibold leading-snug text-gray-100 transition-colors group-hover:text-indigo-300">
+          {@post.title}
+        </h2>
+        
+    <!-- Description -->
+        <p class="line-clamp-3 text-sm leading-relaxed text-gray-400">
+          {@post.description}
+        </p>
+        
+    <!-- Tags -->
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <%= for tag <- @post.tags do %>
+            <span class={"inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide " <> tag_classes(tag)}>
+              {tag}
+            </span>
+          <% end %>
+        </div>
+        
+    <!-- Date -->
+        <div class="mt-auto pt-3">
+          <time
+            datetime={Date.to_iso8601(@post.date)}
+            class="text-[11px] font-medium tracking-wide text-gray-600"
+          >
+            {Calendar.strftime(@post.date, "%B %-d, %Y")}
+          </time>
+        </div>
+      </div>
+    </a>
+    """
+  end
+
+  @doc """
+  Returns Tailwind classes based on a tag name.
+  """
+  def tag_classes(tag) do
+    case String.downcase(tag) do
+      "elixir" -> "bg-purple-500/15 text-purple-300"
+      "devlog" -> "bg-pink-500/15 text-pink-300"
+      "programming" -> "bg-cyan-500/15 text-cyan-300"
+      "rust" -> "bg-orange-500/20 text-orange-400"
+      "gamedev" -> "bg-green-500/15 text-green-300"
+      "offtopic" -> "bg-blue-500/15 text-blue-300"
+      _ -> "bg-gray-500/15 text-gray-300"
+    end
+  end
 end
