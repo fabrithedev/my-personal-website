@@ -5,7 +5,15 @@
     <%= for tag <- @tags do %>
       <a
         href={"/posts?tag=#{tag}"}
-        class={"inline-flex items-center rounded-full border border-white/[0.08] px-3 py-1 text-xs font-medium transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300 " <> tag_classes(tag)}
+        class={[
+          "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300",
+          if(@current_tag != nil and tag != @current_tag,
+            do: "bg-gray-500/10 text-gray-500 border-white/[0.08] opacity-60",
+            else: tag_classes(tag)
+          ),
+          tag == @current_tag && "border-indigo-400 ring-1 ring-indigo-400",
+          tag != @current_tag && "border-white/[0.08]"
+        ]}
       >
         {tag}
       </a>
