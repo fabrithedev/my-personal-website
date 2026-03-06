@@ -7,6 +7,10 @@
 }
 ---
 
+<p align="center">
+    <img src="/images/posts/2026/03-05-onescreen.jpg" alt="Imagem do meu escritório com apenas uma tela" width="384" height="544">
+</p>
+
 Quando comecei a programar, sempre quis ter vários monitores. "Os verdadeiros programadores usam mais de um monitor", li em algum lugar. Demorou um pouco até eu ter dinheiro para comprar um segundo monitor. No começo, achei um espetáculo, mas em pouco tempo a sensação que eu tinha era a de que agora precisava de monitores maiores. Dois monitores de vinte e poucas polegadas já não bastavam. E foi assim que comprei monitores maiores.
 
 O dobro de espaço, o dobro de janelas. Programar em uma tela e ter a documentação aberta em outra. Um sonho. Mas pouco tempo depois, li em algum lugar que os verdadeiros programadores amavam monitores ultrawide. Mais espaço para abrir janelas lado a lado: e-mail, Slack, Teams, terminal, editor, Spotify. Precisamos ver tudo e ver tudo ao mesmo tempo! Parecia a coisa certa a se fazer. E foi assim que troquei o monitor principal por um ultrawide.

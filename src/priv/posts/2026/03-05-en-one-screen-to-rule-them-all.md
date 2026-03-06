@@ -6,7 +6,9 @@
     description: "Letting go of multiple monitors and dynamic tiling."
 }
 ---
-
+<p align="center">
+    <img src="/images/posts/2026/03-05-onescreen.jpg" alt="A image of my desk with just one screen" width="384" height="544">
+</p>
 
 When I first started programming, I always wanted multiple monitors. "Real programmers use more than one monitor," I read somewhere. It took a while for me to save up for a second monitor. At first, I thought it was amazing, but soon enough I felt like I needed bigger monitors. Two twenty-something-inch monitors just weren't cutting it anymore. And that's how I ended up buying bigger monitors.
 
