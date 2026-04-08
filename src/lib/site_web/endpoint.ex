@@ -8,6 +8,8 @@ defmodule SiteWeb.Endpoint do
     store: :cookie,
     key: "_site_key",
     signing_salt: "/9alCj8f",
+    # "Lax" is intentional: "Strict" would break OAuth redirects from GitHub/Google,
+    # since the browser would not send the session cookie on the cross-site callback.
     same_site: "Lax"
   ]
 
