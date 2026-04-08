@@ -63,4 +63,13 @@ defmodule Site.Blog do
   def get_tags() do
     all_tags()
   end
+
+  @doc """
+  Returns all posts across all locales, sorted by date descending.
+  Intended for use by the sitemap.
+  """
+  @spec get_all_posts() :: [Post.t()]
+  def get_all_posts do
+    all_posts() |> Enum.sort_by(& &1.date, {:desc, Date})
+  end
 end

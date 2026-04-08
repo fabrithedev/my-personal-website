@@ -35,6 +35,7 @@ defmodule SiteWeb.Router do
     get "/about", PageController, :about
     get "/posts", PageController, :posts
     get "/posts/:year/:month/:id", PageController, :show
+    get "/sitemap.xml", SitemapController, :index
   end
 
   # Other scopes may use custom stacks.
