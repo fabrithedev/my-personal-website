@@ -20,7 +20,7 @@ defmodule SiteWeb.PageControllerTest do
 
   test "GET /about", %{conn: conn} do
     conn = get(conn, ~p"/about")
-    assert html_response(conn, 200) =~ "aboutme"
+    assert html_response(conn, 200) =~ "About me"
   end
 
   describe "GET /posts?tag=x" do
