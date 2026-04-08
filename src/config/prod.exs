@@ -10,10 +10,8 @@ config :site, SiteWeb.Endpoint,
   check_origin: [
     "https://fabridamazio.com",
     "//*.fabridamazio.com",
-    "https://www.fabridamazio.com",
     "https://fabrithedev.com",
     "//*.fabrithedev.com",
-    "https://www.fabrithedev.com",
     "https://my-personal-website.fly.dev"
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
