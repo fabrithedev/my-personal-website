@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <meta name="description" content="Indie gamedev • Elixir, Rust and Godot experiments" />
+    <meta name="description" content={assigns[:page_description] || "Indie gamedev • Elixir, Rust and Godot experiments"} />
     <%= if assigns[:post] do %>
       <meta property="og:title" content={@post.title} />
       <meta property="og:description" content={@post.description} />
@@ -14,6 +14,17 @@
     <.live_title default="Fabri Damazio" suffix=" · Blog">
       {assigns[:page_title]}
     </.live_title>
+    <%= if assigns[:canonical_url] do %>
+      <link rel="canonical" href={@canonical_url} />
+    <% end %>
+    <%= if assigns[:hreflang_alternates] do %>
+      <%= for {lang, href} <- @hreflang_alternates do %>
+        <link rel="alternate" hreflang={lang} href={href} />
+      <% end %>
+      <link rel="alternate" hreflang="x-default" href={SiteWeb.Endpoint.url()} />
+    <% end %>
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    {json_ld_tag(assigns[:json_ld_schema])}
     <link rel="preconnect" href="https://fabridamazio.com" />
     <style>
       body { background-color: #0a0f1a; }

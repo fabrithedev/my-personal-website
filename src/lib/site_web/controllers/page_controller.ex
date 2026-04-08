@@ -1,18 +1,45 @@
 defmodule SiteWeb.PageController do
   use SiteWeb, :controller
-  require Gettext.Macros
   alias Site.Blog
 
+  @supported_locales ~w(pt en zh)
+  @default_description "Indie gamedev • Elixir, Rust and Godot experiments"
+
   def home(conn, _params) do
-    posts = Blog.get_posts(8, SiteWeb.Gettext |> Gettext.get_locale())
+    locale = Gettext.get_locale(SiteWeb.Gettext)
+    posts = Blog.get_posts(8, locale)
     tags = Blog.get_tags()
     skeets = Site.Bluesky.get_posts(10)
-    render(conn, :home, posts: posts, tags: tags, skeets: skeets, current_tag: nil, layout: false)
+
+    render(conn, :home,
+      posts: posts,
+      tags: tags,
+      skeets: skeets,
+      current_tag: nil,
+      layout: false,
+      page_description: @default_description,
+      canonical_url: url(~p"/?locale=#{locale}"),
+      hreflang_alternates: Enum.map(@supported_locales, &{&1, url(~p"/?locale=#{&1}")}),
+      json_ld_schema: %{
+        "@context" => "https://schema.org",
+        "@type" => "WebSite",
+        "name" => "Fabri the Dev",
+        "url" => SiteWeb.Endpoint.url(),
+        "description" => @default_description,
+        "sameAs" => [
+          "https://github.com/fabrithedev",
+          "https://bsky.app/profile/fabrithedev.com",
+          "https://youtube.com/@fabrithedev"
+        ]
+      }
+    )
   end
 
   def show(conn, %{"year" => year, "month" => month, "id" => id}) do
+    locale = Gettext.get_locale(SiteWeb.Gettext)
+
     {post, conn} =
-      case get_post_by_id_and_locale(id, SiteWeb.Gettext |> Gettext.get_locale()) do
+      case get_post_by_id_and_locale(id, locale) do
         nil ->
           conn_with_flash = put_flash(conn, :error, gettext("post-not-found-locale"))
 
@@ -41,32 +68,93 @@ defmodule SiteWeb.PageController do
         |> Phoenix.Controller.redirect(to: path, status: 301)
         |> halt()
       else
-        render(conn, :show, post: post)
+        post_path = ~p"/posts/#{post.date.year}/#{post.date.month}/#{post.id}"
+        base_url = SiteWeb.Endpoint.url()
+        all_versions = Blog.get_post(post.id)
+
+        hreflang_alternates =
+          Enum.map(all_versions, fn p ->
+            {p.language, "#{base_url}#{post_path}?locale=#{p.language}"}
+          end)
+
+        render(conn, :show,
+          post: post,
+          page_title: post.title,
+          page_description: post.description,
+          canonical_url: "#{base_url}#{post_path}?locale=#{post.language}",
+          hreflang_alternates: hreflang_alternates,
+          json_ld_schema: %{
+            "@context" => "https://schema.org",
+            "@type" => "BlogPosting",
+            "headline" => post.title,
+            "description" => post.description,
+            "datePublished" => Date.to_iso8601(post.date),
+            "inLanguage" => post.language,
+            "author" => %{
+              "@type" => "Person",
+              "name" => post.author,
+              "url" => base_url
+            },
+            "url" => "#{base_url}#{post_path}?locale=#{post.language}"
+          }
+        )
       end
     end
   end
 
   def about(conn, _params) do
-    render(conn, :about)
+    render(conn, :about,
+      page_title: "About",
+      page_description: @default_description,
+      canonical_url: url(~p"/about"),
+      json_ld_schema: %{
+        "@context" => "https://schema.org",
+        "@type" => "WebSite",
+        "name" => "Fabri the Dev",
+        "url" => SiteWeb.Endpoint.url(),
+        "description" => @default_description
+      }
+    )
   end
 
   def posts(conn, %{"tag" => tag}) do
+    locale = Gettext.get_locale(SiteWeb.Gettext)
     posts = Blog.get_posts_by_tag(tag)
     tags = Blog.get_tags()
     skeets = Site.Bluesky.get_posts(10)
-    render(conn, :home, posts: posts, tags: tags, skeets: skeets, current_tag: tag, layout: false)
+
+    render(conn, :home,
+      posts: posts,
+      tags: tags,
+      skeets: skeets,
+      current_tag: tag,
+      layout: false,
+      page_description: @default_description,
+      canonical_url: url(~p"/posts?tag=#{tag}&locale=#{locale}"),
+      hreflang_alternates: Enum.map(@supported_locales, &{&1, url(~p"/posts?tag=#{tag}&locale=#{&1}")})
+    )
   end
 
   def posts(conn, _params) do
-    posts = Blog.get_posts(8, Gettext |> Gettext.get_locale())
+    locale = Gettext.get_locale(SiteWeb.Gettext)
+    posts = Blog.get_posts(8, locale)
     tags = Blog.get_tags()
     skeets = Site.Bluesky.get_posts(10)
-    render(conn, :home, posts: posts, tags: tags, skeets: skeets, current_tag: nil, layout: false)
+
+    render(conn, :home,
+      posts: posts,
+      tags: tags,
+      skeets: skeets,
+      current_tag: nil,
+      layout: false,
+      page_description: @default_description,
+      canonical_url: url(~p"/posts?locale=#{locale}"),
+      hreflang_alternates: Enum.map(@supported_locales, &{&1, url(~p"/posts?locale=#{&1}")})
+    )
   end
 
   defp get_post_by_id_and_locale(id, locale) do
     Blog.get_post(id)
-    |> Enum.filter(fn x -> x.language == locale end)
-    |> List.first()
+    |> Enum.find(fn x -> x.language == locale end)
   end
 end

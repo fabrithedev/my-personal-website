@@ -11,6 +11,16 @@ defmodule SiteWeb.Layouts do
   # and other static content.
   embed_templates "layouts/*"
 
+  # Generates a <script type="application/ld+json"> tag as raw HTML.
+  # Must be called from regular HTML context (not inside a <script> tag),
+  # because HEEx treats <script> content as raw text and won't evaluate expressions.
+  def json_ld_tag(nil), do: Phoenix.HTML.raw("")
+
+  def json_ld_tag(schema) do
+    json = Jason.encode!(schema)
+    Phoenix.HTML.raw(~s(<script type="application/ld+json">#{json}</script>))
+  end
+
   def generate_locale_url(conn, locale) do
     uri = %URI{
       scheme: to_string(conn.scheme),
