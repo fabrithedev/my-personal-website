@@ -32,11 +32,11 @@ defmodule SiteWeb.Plugs.SetLocalePlug do
     SiteWeb.Gettext |> Gettext.put_locale(locale)
 
     conn
+    |> assign(:locale_set, true)
     |> put_resp_cookie(
       "locale",
       locale,
-      max_age: 365 * 24 * 60 * 60,
-      http_only: false
+      max_age: 365 * 24 * 60 * 60
     )
   end
 end
