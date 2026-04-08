@@ -29,6 +29,11 @@ defmodule SiteWeb.CoreComponents do
   alias Phoenix.Flash
   use Phoenix.Component
 
+  use Phoenix.VerifiedRoutes,
+    endpoint: SiteWeb.Endpoint,
+    router: SiteWeb.Router,
+    statics: SiteWeb.static_paths()
+
   def flash(assigns) do
     ~H"""
     <div class="flash-messages">
@@ -164,7 +169,7 @@ defmodule SiteWeb.CoreComponents do
   def post(assigns) do
     ~H"""
     <a
-      href={"/posts/#{@post.date.year}/#{@post.date.month}/#{@post.id}"}
+      href={~p"/posts/#{@post.date.year}/#{@post.date.month}/#{@post.id}"}
       class="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
     >
       <!-- Accent gradient bar -->
