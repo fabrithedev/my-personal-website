@@ -51,9 +51,15 @@ defmodule Site.Bluesky.Post do
       images: parse_images(post["embed"]),
       author_name: author["displayName"],
       author_handle: author["handle"],
-      author_avatar: author["avatar"],
+      author_avatar: thumbnail_avatar(author["avatar"]),
       reposted_by: parse_repost_reason(item["reason"])
     }
+  end
+
+  defp thumbnail_avatar(nil), do: nil
+
+  defp thumbnail_avatar(url) do
+    String.replace(url, "/img/avatar/plain/", "/img/avatar_thumbnail/plain/")
   end
 
   defp parse_repost_reason(%{"$type" => "app.bsky.feed.defs#reasonRepost", "by" => by}) do
