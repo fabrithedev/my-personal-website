@@ -39,11 +39,11 @@ defmodule SiteWeb.PageController do
     locale = Gettext.get_locale(SiteWeb.Gettext)
 
     {post, conn} =
-      case get_post_by_id_and_locale(id, locale) do
+      case Blog.get_post_by_id_and_locale(id, locale) do
         nil ->
           conn_with_flash = put_flash(conn, :error, gettext("post-not-found-locale"))
 
-          {get_post_by_id_and_locale(
+          {Blog.get_post_by_id_and_locale(
              id,
              Application.get_env(:site, SiteWeb.Gettext)[:default_locale]
            ), conn_with_flash}
@@ -70,7 +70,7 @@ defmodule SiteWeb.PageController do
       else
         post_path = ~p"/posts/#{post.date.year}/#{post.date.month}/#{post.id}"
         base_url = SiteWeb.Endpoint.url()
-        all_versions = Blog.get_post(post.id)
+        all_versions = Blog.get_all_post_languages_by_id(post.id)
 
         hreflang_alternates =
           Enum.map(all_versions, fn p ->
@@ -131,7 +131,8 @@ defmodule SiteWeb.PageController do
       layout: false,
       page_description: @default_description,
       canonical_url: url(~p"/posts?tag=#{tag}&locale=#{locale}"),
-      hreflang_alternates: Enum.map(@supported_locales, &{&1, url(~p"/posts?tag=#{tag}&locale=#{&1}")})
+      hreflang_alternates:
+        Enum.map(@supported_locales, &{&1, url(~p"/posts?tag=#{tag}&locale=#{&1}")})
     )
   end
 
@@ -151,10 +152,5 @@ defmodule SiteWeb.PageController do
       canonical_url: url(~p"/posts?locale=#{locale}"),
       hreflang_alternates: Enum.map(@supported_locales, &{&1, url(~p"/posts?locale=#{&1}")})
     )
-  end
-
-  defp get_post_by_id_and_locale(id, locale) do
-    Blog.get_post(id)
-    |> Enum.find(fn x -> x.language == locale end)
   end
 end

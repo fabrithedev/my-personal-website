@@ -39,10 +39,19 @@ defmodule Site.Blog do
   @doc """
   Returns the posts with the given id.
   """
-  @spec get_post(String.t()) :: [Post.t()] | nil
-  def get_post(id) when is_binary(id) do
+  @spec get_all_post_languages_by_id(String.t()) :: [Post.t()]
+  def get_all_post_languages_by_id(id) when is_binary(id) do
     all_posts()
     |> Enum.filter(fn x -> x.id == id end)
+  end
+
+  @doc """
+  Returns the post with the given id and locale.
+  """
+  @spec get_post_by_id_and_locale(String.t(), String.t()) :: Post.t() | nil
+  def get_post_by_id_and_locale(id, locale) when is_binary(id) and is_binary(locale) do
+    all_posts()
+    |> Enum.find(fn x -> x.id == id && x.language == locale end)
   end
 
   @doc """
