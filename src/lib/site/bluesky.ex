@@ -44,6 +44,7 @@ defmodule Site.Bluesky do
 
   defp fetch_posts(handle) do
     url = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed"
+
     case Req.get(url, params: [actor: handle, limit: 30, filter: "posts_no_replies"]) do
       {:ok, %{status: 200, body: %{"feed" => feed}}} ->
         Enum.map(feed, &Post.from_feed_item/1)

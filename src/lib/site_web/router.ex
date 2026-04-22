@@ -7,6 +7,7 @@ defmodule SiteWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, html: {SiteWeb.Layouts, :root}
     plug :protect_from_forgery
+
     # 'unsafe-inline' in script-src is required by the locale-detect inline script in root.html.heex.
     # To remove it, that script would need to be moved to an external file or use a per-request nonce.
     plug :put_secure_browser_headers, %{
@@ -21,6 +22,7 @@ defmodule SiteWeb.Router do
           "object-src 'none'; " <>
           "base-uri 'self'"
     }
+
     plug SiteWeb.Plugs.SetLocalePlug
   end
 
