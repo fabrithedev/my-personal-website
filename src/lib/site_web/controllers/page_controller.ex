@@ -73,7 +73,7 @@ defmodule SiteWeb.PageController do
         all_versions = Blog.get_all_post_languages_by_id(post.id)
 
         hreflang_alternates =
-          Enum.map(all_versions, fn p ->
+          Enum.map(Map.values(all_versions), fn p ->
             {p.language, "#{base_url}#{post_path}?locale=#{p.language}"}
           end)
 

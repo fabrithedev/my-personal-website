@@ -25,24 +25,27 @@ defmodule Site.Blog do
 
   defp all_tags, do: @tags
 
+  defp sort_posts_desc(posts), do: Enum.sort_by(posts, & &1.date, {:desc, Date})
+
   @doc """
   Returns a list of all posts, sorted by date in descending order.
   """
-  @spec get_posts(integer(), String.t()) :: [Post.t()]
-  def get_posts(count, locale) when is_integer(count) and is_binary(locale) do
+  @spec get_posts(non_neg_integer(), String.t()) :: [Post.t()]
+  def get_posts(count, locale) when is_integer(count) and count >= 0 and is_binary(locale) do
     all_posts()
-    |> Enum.sort_by(& &1.date, {:desc, Date})
-    |> Enum.filter(fn x -> x.language == locale end)
+    |> Enum.filter(&(&1.language == locale))
+    |> sort_posts_desc()
     |> Enum.take(count)
   end
 
   @doc """
-  Returns the posts with the given id.
+  Returns all language versions of a post as a map keyed by language.
   """
-  @spec get_all_post_languages_by_id(String.t()) :: [Post.t()]
+  @spec get_all_post_languages_by_id(String.t()) :: %{String.t() => Post.t()}
   def get_all_post_languages_by_id(id) when is_binary(id) do
     all_posts()
-    |> Enum.filter(fn x -> x.id == id end)
+    |> Enum.filter(&(&1.id == id))
+    |> Enum.reduce(%{}, fn post, acc -> Map.put(acc, post.language, post) end)
   end
 
   @doc """
@@ -60,8 +63,8 @@ defmodule Site.Blog do
   @spec get_posts_by_tag(String.t(), String.t()) :: [Post.t()]
   def get_posts_by_tag(tag, locale) when is_binary(tag) and is_binary(locale) do
     all_posts()
-    |> Enum.sort_by(& &1.date, {:desc, Date})
-    |> Enum.filter(fn x -> tag in x.tags and x.language == locale end)
+    |> Enum.filter(&(&1.language == locale and tag in &1.tags))
+    |> sort_posts_desc()
   end
 
   @doc """
