@@ -54,23 +54,23 @@ defmodule Site.BlogTest do
 
   describe "get_posts_by_tag/1" do
     test "returns all posts with the given tag" do
-      posts_hello = Blog.get_posts_by_tag("hello")
+      posts_hello = Blog.get_posts_by_tag("hello", "en")
 
       assert length(posts_hello) == 2
 
-      posts_world = Blog.get_posts_by_tag("world")
+      posts_world = Blog.get_posts_by_tag("world", "en")
 
       assert length(posts_world)
     end
 
     test "returns empty list when the tag dont exists" do
-      posts = Blog.get_posts_by_tag("nonexistent")
+      posts = Blog.get_posts_by_tag("nonexistent", "en")
 
       assert length(posts) == 0
     end
 
     test "raise FunctionClauseError when nil" do
-      assert_raise(FunctionClauseError, fn -> Blog.get_posts_by_tag(nil) end)
+      assert_raise(FunctionClauseError, fn -> Blog.get_posts_by_tag(nil, "en") end)
     end
   end
 

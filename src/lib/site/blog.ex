@@ -55,14 +55,13 @@ defmodule Site.Blog do
   end
 
   @doc """
-  Returns all posts filtered by the given tag.
+  Returns all posts filtered by the given tag and locale.
   """
-  @spec get_posts_by_tag(String.t()) :: [Post.t()]
-  def get_posts_by_tag(tag) when is_binary(tag) do
+  @spec get_posts_by_tag(String.t(), String.t()) :: [Post.t()]
+  def get_posts_by_tag(tag, locale) when is_binary(tag) and is_binary(locale) do
     all_posts()
     |> Enum.sort_by(& &1.date, {:desc, Date})
-    |> Enum.filter(fn x -> x.language == SiteWeb.Gettext |> Gettext.get_locale() end)
-    |> Enum.filter(fn x -> Enum.any?(x.tags, &(&1 == tag)) end)
+    |> Enum.filter(fn x -> tag in x.tags and x.language == locale end)
   end
 
   @doc """

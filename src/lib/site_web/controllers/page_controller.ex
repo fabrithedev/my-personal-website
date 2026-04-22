@@ -119,7 +119,7 @@ defmodule SiteWeb.PageController do
 
   def posts(conn, %{"tag" => tag}) do
     locale = Gettext.get_locale(SiteWeb.Gettext)
-    posts = Blog.get_posts_by_tag(tag)
+    posts = Blog.get_posts_by_tag(tag, locale)
     tags = Blog.get_tags()
     skeets = Site.Bluesky.get_posts(10)
 
