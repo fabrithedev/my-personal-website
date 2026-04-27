@@ -67,12 +67,12 @@ defmodule SiteWeb.CoreComponents do
       href={@skeet.url}
       target="_blank"
       rel="noopener"
-      class="group cursor-pointer flex-shrink-0 snap-start rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
+      class="group cursor-pointer flex-shrink-0 snap-start rounded-xl border border-warm-line/10 bg-warm-line/5 p-4 transition duration-300 hover:border-copper/30 hover:bg-warm-line/10 hover:shadow-ember-glow"
     >
       <%= if @skeet.reposted_by do %>
-        <div class="mb-2 flex items-center gap-1.5 text-[11px] text-gray-500">
+        <div class="mb-2 flex items-center gap-1.5 text-[11px] text-ash">
           <svg
-            class="h-3 w-3 text-indigo-400/70"
+            class="h-3 w-3 text-copper/70"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -92,19 +92,19 @@ defmodule SiteWeb.CoreComponents do
           <img
             src={@skeet.author_avatar}
             alt={@skeet.author_name}
-            class="h-8 w-8 flex-shrink-0 rounded-full border border-white/[0.06]"
+            class="h-8 w-8 flex-shrink-0 rounded-full border border-warm-line/10"
             loading="lazy"
           />
         <% end %>
         <div class="min-w-0 flex-1">
           <div class="flex items-baseline gap-1.5 text-sm">
-            <span class="font-semibold text-gray-100">{@skeet.author_name}</span>
-            <span class="text-xs text-gray-500">@{@skeet.author_handle}</span>
+            <span class="font-semibold text-parchment">{@skeet.author_name}</span>
+            <span class="text-xs text-ash">@{@skeet.author_handle}</span>
             <%= if @skeet.created_at do %>
-              <span class="text-xs text-gray-600">·</span>
+              <span class="text-xs text-ash">·</span>
               <time
                 datetime={DateTime.to_iso8601(@skeet.created_at)}
-                class="text-xs text-gray-500"
+                class="text-xs text-ash"
               >
                 {Calendar.strftime(@skeet.created_at, "%b %-d")}
               </time>
@@ -113,7 +113,7 @@ defmodule SiteWeb.CoreComponents do
         </div>
       </div>
       <div class="flex gap-3">
-        <p class="line-clamp-4 min-w-0 flex-1 text-sm leading-relaxed text-gray-300">
+        <p class="line-clamp-4 min-w-0 flex-1 text-sm leading-relaxed text-body-copy">
           {@skeet.text}
         </p>
         <%= if @skeet.images != [] do %>
@@ -122,7 +122,7 @@ defmodule SiteWeb.CoreComponents do
               <img
                 src={img.thumb}
                 alt={img.alt}
-                class="h-20 w-20 rounded border border-white/[0.06] object-cover"
+                class="h-20 w-20 rounded border border-warm-line/10 object-cover"
                 loading="lazy"
               />
             <% end %>
@@ -130,13 +130,13 @@ defmodule SiteWeb.CoreComponents do
         <% end %>
       </div>
       <div class="mt-3 flex items-center gap-4 text-[11px]">
-        <span class="flex items-center gap-1 text-pink-400/80">
+        <span class="flex items-center gap-1 text-ember/80">
           <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
           </svg>
-          <span class="text-gray-300">{@skeet.like_count}</span>
+          <span class="text-body-copy">{@skeet.like_count}</span>
         </span>
-        <span class="flex items-center gap-1 text-indigo-400/80">
+        <span class="flex items-center gap-1 text-copper/80">
           <svg
             class="h-3.5 w-3.5"
             fill="none"
@@ -150,7 +150,7 @@ defmodule SiteWeb.CoreComponents do
               d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"
             />
           </svg>
-          <span class="text-gray-300">{@skeet.repost_count}</span>
+          <span class="text-body-copy">{@skeet.repost_count}</span>
         </span>
       </div>
     </a>
@@ -170,20 +170,20 @@ defmodule SiteWeb.CoreComponents do
     ~H"""
     <a
       href={~p"/posts/#{@post.date.year}/#{@post.date.month}/#{@post.id}"}
-      class="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.12)]"
+      class="group relative flex flex-col overflow-hidden rounded-xl border border-warm-line/10 bg-warm-line/5 transition duration-300 hover:border-copper/30 hover:bg-warm-line/10 hover:shadow-ember-glow"
     >
       <!-- Accent gradient bar -->
-      <div class="h-[2px] w-full bg-gradient-to-r from-indigo-500/60 via-purple-500/60 to-pink-500/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <div class="h-[2px] w-full bg-gradient-to-r from-copper/80 to-ember/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
       </div>
 
       <div class="flex flex-1 flex-col gap-3 p-5">
         <!-- Title -->
-        <h2 class="text-lg font-semibold leading-snug text-gray-100 transition-colors group-hover:text-indigo-300">
+        <h2 class="text-lg font-semibold leading-snug text-parchment transition-colors group-hover:text-brass">
           {@post.title}
         </h2>
         
     <!-- Description -->
-        <p class="line-clamp-3 text-sm leading-relaxed text-gray-400">
+        <p class="line-clamp-3 text-sm leading-relaxed text-stone">
           {@post.description}
         </p>
         
@@ -200,7 +200,7 @@ defmodule SiteWeb.CoreComponents do
         <div class="mt-auto pt-3">
           <time
             datetime={Date.to_iso8601(@post.date)}
-            class="text-[11px] font-medium tracking-wide text-gray-600"
+            class="text-[11px] font-medium tracking-wide text-ash"
           >
             {Calendar.strftime(@post.date, "%B %-d, %Y")}
           </time>
@@ -215,13 +215,13 @@ defmodule SiteWeb.CoreComponents do
   """
   def tag_classes(tag) do
     case String.downcase(tag) do
-      "elixir" -> "bg-purple-500/15 text-purple-300"
-      "devlog" -> "bg-pink-500/15 text-pink-300"
-      "programming" -> "bg-cyan-500/15 text-cyan-300"
-      "rust" -> "bg-orange-500/20 text-orange-400"
-      "gamedev" -> "bg-green-500/15 text-green-300"
-      "offtopic" -> "bg-blue-500/15 text-blue-300"
-      _ -> "bg-gray-500/15 text-gray-300"
+      "elixir" -> "bg-tag-elixir-bg/20 text-tag-elixir"
+      "devlog" -> "bg-tag-devlog-bg/20 text-tag-devlog"
+      "programming" -> "bg-tag-programming-bg/20 text-tag-programming"
+      "rust" -> "bg-tag-rust-bg/25 text-tag-rust"
+      "gamedev" -> "bg-tag-gamedev-bg/20 text-tag-gamedev"
+      "offtopic" -> "bg-tag-offtopic-bg/25 text-tag-offtopic"
+      _ -> "bg-tag-offtopic-bg/25 text-tag-offtopic"
     end
   end
 end

@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fabrithedev.com" />
     <link rel="preconnect" href="https://fabridamazio.com" />
     <style>
-      body { background-color: #0a0f1a; }
+      body { background-color: var(--color-ink); }
     </style>
     <link rel="stylesheet" href={~p"/assets/css/app.css"} phx-track-static />
     <link rel="preload" href="/images/br_flag.svg" as="image" type="image/svg+xml" />
@@ -54,16 +54,16 @@
       })();
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-[#0a0f1a] text-gray-200 antialiased">
+  <body class="min-h-screen flex flex-col bg-ink text-stone antialiased">
     <!-- Sticky glassmorphism navbar -->
-    <header class="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0a0f1a]/80 backdrop-blur-xl">
+    <header class="sticky top-0 z-50 border-b border-warm-line/10 bg-ink/80 backdrop-blur-xl">
       <div class="mx-auto max-w-5xl px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <!-- Brand -->
         <a href={~p"/"} class="group flex flex-col gap-0.5">
-          <span class="text-xl font-bold tracking-tight text-gray-100 transition-colors group-hover:text-indigo-400">
+          <span class="text-xl font-bold tracking-tight text-parchment transition-colors group-hover:text-copper-bright">
             fabri the dev
           </span>
-          <span class="text-xs font-medium tracking-wide text-gray-500 transition-colors group-hover:text-gray-400">
+          <span class="text-xs font-medium tracking-wide text-ash transition-colors group-hover:text-stone">
             {gettext("motto")}
           </span>
         </a>
@@ -71,10 +71,10 @@
 <!-- Navigation -->
         <nav class="flex items-center gap-3">
           <!-- Language switcher -->
-          <div class="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5">
+          <div class="flex items-center gap-1.5 rounded-full border border-warm-line/10 bg-warm-line/5 px-2.5 py-1.5">
             <a
               href={generate_locale_url(@conn, "pt")}
-              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              class="rounded-full p-1 transition hover:bg-warm-line/10"
               title="Português"
               aria-current={
                 if Gettext.get_locale(SiteWeb.Gettext) == "pt", do: "true", else: false
@@ -90,7 +90,7 @@
             </a>
             <a
               href={generate_locale_url(@conn, "en")}
-              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              class="rounded-full p-1 transition hover:bg-warm-line/10"
               title="English"
               aria-current={
                 if Gettext.get_locale(SiteWeb.Gettext) == "en", do: "true", else: false
@@ -106,7 +106,7 @@
             </a>
             <a
               href={generate_locale_url(@conn, "zh")}
-              class="rounded-full p-1 transition hover:bg-white/[0.08]"
+              class="rounded-full p-1 transition hover:bg-warm-line/10"
               title="中文"
               aria-current={
                 if Gettext.get_locale(SiteWeb.Gettext) == "zh", do: "true", else: false
@@ -125,7 +125,7 @@
 <!-- About link -->
           <a
             href="/about"
-            class="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 text-sm font-semibold text-gray-300 transition hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-300"
+            class="rounded-lg border border-warm-line/10 bg-warm-line/5 px-4 py-1.5 text-sm font-semibold text-stone transition hover:border-copper/40 hover:bg-copper/10 hover:text-brass"
             aria-current={if @conn.request_path == "/about", do: "page", else: false}
           >
             {gettext("About me")}
@@ -141,9 +141,9 @@
     </main>
     
 <!-- Footer -->
-    <footer class="border-t border-white/[0.06] bg-[#0a0f1a]/60">
+    <footer class="border-t border-warm-line/10 bg-ink/60">
       <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-        <p class="text-xs text-gray-600">
+        <p class="text-xs text-ash">
           © {Date.utc_today().year} Fabricio Damazio
         </p>
         <div class="flex items-center gap-5">
@@ -151,7 +151,7 @@
             href="https://github.com/fabrithedev"
             target="_blank"
             rel="noopener"
-            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-gray-300"
+            class="rounded-lg p-2 text-ash transition hover:bg-warm-line/5 hover:text-stone"
             aria-label="GitHub"
           >
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -162,7 +162,7 @@
             href="https://youtube.com/@fabrithedev"
             target="_blank"
             rel="noopener"
-            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-red-500"
+            class="rounded-lg p-2 text-ash transition hover:bg-tag-devlog-bg/10 hover:text-tag-devlog"
             aria-label="YouTube"
           >
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -173,7 +173,7 @@
             href="https://bsky.app/profile/fabrithedev.com"
             target="_blank"
             rel="noopener"
-            class="rounded-lg p-2 text-gray-600 transition hover:bg-white/[0.06] hover:text-blue-400"
+            class="rounded-lg p-2 text-ash transition hover:bg-tag-programming-bg/10 hover:text-tag-programming"
             aria-label="Bluesky"
           >
             <svg class="h-5 w-5" viewBox="0 0 600 512" fill="currentColor">
