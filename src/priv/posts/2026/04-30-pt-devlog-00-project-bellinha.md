@@ -13,51 +13,48 @@ Um tempo depois disso, comecei a pensar em um novo projeto. Um jogo sobre o rela
 
 O projeto Bellinha ainda está no começo. Algumas ideias já estão bem definidas, outras ainda estão sendo testadas e muita coisa provavelmente vai mudar até virar um jogo completo. Este devlog existe para registrar esse processo: as decisões, o protótipo, os erros e as pequenas descobertas no caminho.
 
-***IMPORTANTE: estou à procura de uma concept artist/diretor de arte para trabalhar neste projeto. Um trabalho freelance pago (que esteja dentro do meu pequeno orçamento disponível)***.
+***IMPORTANTE: estou à procura de uma pessoa para concept art/direção de arte neste projeto. O trabalho é freelance, pago e deve estar dentro do meu orçamento disponível***.
 
 # **O projeto Bellinha**
 
-É o projeto de um jogo narrativo 3D sobre vínculo, memória e cuidado. A ideia é construir uma experiência curta, contemplativa e emocional, com um certo nível de exploração e puzzles integrados ao mundo. Quero contar a história do relacionamento de um garoto e sua gata, uma experiência pessoal contada através do jogo. 
+É um projeto de jogo narrativo 3D sobre vínculo, memória e cuidado. A ideia é construir uma experiência curta, contemplativa e emocional, com um certo grau de exploração e puzzles integrados ao mundo. Quero contar a história do relacionamento de um garoto e sua gata, partindo da minha experiência pessoal de luto. 
 
-O visual deve ser low-poly simples (quero tentar aprender e fazer pelo menos parte dos assets). A visão do jogador será fixa em uma perspectiva isométrica na faixa de 45 graus com FOV baixo (ao estilo do jogo Tunic). Não posso pensar em gráficos extremamente elaborados porque não tenho a habilidade necessária nem orçamento suficiente para isso. 
+O visual deve ser low-poly simples (quero tentar aprender e fazer pelo menos parte dos assets). A visão do jogador será fixa em uma perspectiva isométrica na faixa de 45 graus com FOV baixo (ao estilo do jogo Tunic). Não faz sentido pensar em gráficos extremamente elaborados, porque ainda não tenho a habilidade necessária nem orçamento suficiente para isso. 
 
-Estou desenvolvendo esse projeto no meu tempo livre e acredito que levarei cerca de dois anos para produzi-lo do jeito que eu quero. Já separei um orçamento para contratações pontuais de arte, áudio, marketing e localização. O orçamento é pequeno porque é um dinheiro que vai sair diretamente das minhas economias.
-
+Estou desenvolvendo esse projeto no meu tempo livre e acredito que levarei cerca de dois anos para produzi-lo do jeito que eu quero. Já separei um orçamento para contratações pontuais de arte, áudio, marketing e localização. O orçamento é pequeno porque esse dinheiro sairá diretamente das minhas economias.
 
 # Meta atual: protótipo
 
-A primeira fase do desenvolvimento é um protótipo jogável da primeira área do jogo. Essa área funciona como tutorial orgânico que precisa apresentar movimento, pulo, interação, diálogos, exploração, coleta de itens e os primeiros puzzles. Tudo isso sem depender de longos tutoriais ou explicações fora do mundo do jogo.
+A primeira fase do desenvolvimento é um protótipo jogável da primeira área do jogo. Essa área funciona como um tutorial orgânico que precisa apresentar movimento, pulo, interação, diálogos, exploração, coleta de itens e os primeiros puzzles. Tudo isso sem depender de longos tutoriais ou explicações fora do mundo do jogo.
 
-O protótipo inteiro ainda usa assets temporários de prototipação que comprei e formas simples. Antes de pensar em arte final, trilha sonora, trailer ou página de loja, eu preciso descobrir se a base do jogo funciona. O personagem precisa ser agradável de controlar, a câmera precisa enquadrar bem os espaços, as interações precisam ser claras e o mundo precisa começar a comunicar a sensação certa mesmo usando placeholders.
+O protótipo inteiro ainda usa assets temporários de prototipação e formas simples. Antes de pensar em arte final, trilha sonora, trailer ou página de loja, eu preciso descobrir se a base do jogo funciona. O personagem precisa ser agradável de controlar, a câmera precisa enquadrar bem os espaços, as interações precisam ser claras e o mundo precisa começar a comunicar a sensação certa mesmo usando placeholders.
 
 É com esse protótipo, e com sessões de playtest, que pretendo validar tudo isso.
 
 # O que já existe hoje
 
-Até agora, a base já começou a sair do papel. Criei o projeto na Godot e já tenho movimento, pulo, câmera, interação e diálogo funcionando em forma inicial. Também comecei o blockout da primeira área, ainda com formas simples e assets temporários. Visualmente não é lá muito bonito:
+Até agora, a base já começou a sair do papel. Criei o projeto na Godot e já tenho movimento, pulo, câmera, interação e diálogo funcionando em forma inicial. Também comecei o blockout da primeira área, ainda com formas simples e assets temporários. Visualmente, ainda não é lá muito bonito:
 
 <p align="center">
-    <img src="/images/posts/2026/04-30-bellinha1.png" alt="Tela inicial do OpenCode aberta no terminal" width="384" height="544">
+    <img src="/images/posts/2026/04-30-bellinha1.png" alt="Editor da Godot Engine com blockout da primeira área do jogo" width="384" height="544">
 </p>
 
-Os sistemas de câmera, diálogo e interação são simples e bem específicos para este jogo. Por isso, decidi não usar nenhum dos ótimos plugins criados pela comunidade. Todos serão criados do zero. 
+Para os sistemas de câmera, diálogo e interação, decidi não usar nenhum plugin. Por serem simples e muito específicos para o jogo, preferi criá-los do zero. 
 
 O jogador já se move em 3D com aceleração e desaceleração suaves. O pulo também já está implementado com alguns ajustes de game feel, como coyote time e jump buffer. São detalhes pequenos, mas fazem muita diferença para o controle parecer menos rígido.
 
-A câmera fixa também já está funcionando. Ela segue o jogador suavemente, respeita limites por área e tem suporte a zoom controlado por script. Uma decisão importante foi usar perspectiva com FOV baixo em vez de câmera ortográfica real, para manter um visual parecido com isométrico sem abrir mão de iluminação e sombras melhores no Godot.
+A câmera fixa também já está funcionando. Ela segue o jogador suavemente, respeita limites por área e tem suporte a zoom controlado por script. Uma decisão importante foi usar perspectiva com FOV baixo em vez de uma câmera ortográfica real. Assim posso manter um visual parecido com isométrico sem abrir mão de iluminação e sombras melhores no Godot.
 
 Além disso, o sistema de interação já existe. O jogador detecta objetos próximos, vê um prompt contextual e pode interagir com objetos examináveis, itens coletáveis e NPCs. 
 
-O sistema de diálogo tem caixa de texto, nome do personagem, efeito de digitação, avanço por input e bloqueio do movimento enquanto o diálogo está ativo. Também suporta eventos disparados por falas, o que vai ser importante para coisas como entregar itens e liberar caminhos. O vídeo abaixo mostra um pouco da interação com um NPC e o sistema de diálogo:
+O sistema de diálogo tem caixa de texto, nome do personagem, efeito de digitação, avanço por input e bloqueio do movimento enquanto o diálogo está ativo. Também suporta eventos disparados por falas, o que vai ser importante para ações como entregar itens e liberar caminhos. O vídeo abaixo mostra um pouco da interação com um NPC e o sistema de diálogo:
 
 <video width="1024" height="768" controls>
   <source src="/images/posts/2026/04-30-bellinha1.mp4" type="video/mp4">
       Seu navegador não suporta a tag video.
 </video>
 
-A primeira área funciona como um laboratório para o resto do jogo. Ela precisa ensinar movimentação, pulo, interação e leitura do cenário sem depender de tutoriais ou dicas óbvias. Também é onde começo a testar como um espaço pode carregar emoção sem precisar explicar tudo em texto.
-
-Internamente, essa área tem um tema emocional bem específico, mas ainda prefiro falar dele aos poucos conforme o protótipo amadurece.
+A primeira área servirá como um laboratório para o resto do jogo. Ela precisa ensinar movimentação, pulo, interação e leitura do cenário sem depender de tutoriais ou dicas óbvias. Também é onde começo a testar como um espaço pode carregar emoção sem precisar explicar tudo em texto. Internamente, essa área tem um tema emocional bem específico, que pretendo falar mais nos próximos posts.
 
 # Próximos passos
 
